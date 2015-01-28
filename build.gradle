@@ -1,0 +1,50 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.github.rholder:gradle-one-jar:1.0.4'
+    }
+}
+
+apply plugin: 'idea'
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'gradle-one-jar'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+project.ext {
+    dropwizardVersion = '0.7.1'
+    mainClassName = 'com.morrisons.pfs.helloworld.HelloWorldApplication'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile('io.dropwizard:dropwizard-core:' + dropwizardVersion)
+
+    testCompile(
+            'junit:junit:4.11',
+            'org.mockito:mockito-all:1.9.5'
+    )
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.1'
+    distributionUrl = 'http://services.gradle.org/distributions/gradle-2.1-all.zip'
+}
+
+task oneJar(type: OneJar) {
+    mainClass = mainClassName
+}
+
+artifacts {
+    oneJar
+}

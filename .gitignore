@@ -1,0 +1,9 @@
+# PFS
+build/
+
+# IntelliJ
+.idea/
+*.iml
+
+# Gradle
+.gradle/
