@@ -1,0 +1,1 @@
+A simple Java 8, Dropwizard and Gradle application.
